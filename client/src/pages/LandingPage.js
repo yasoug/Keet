@@ -22,7 +22,7 @@ const LandingPage = () => {
         setIsSignUp={setIsSignUp}
       />
       <div className="home">
-        <h1 className="primary-title">Like that profile</h1>
+        <h1 className="primary-title" style={{color : 'black'}}>Like that profile</h1>
         <button className="primary-button" onClick={handleClick}>
           {authToken ? 'Signout' : 'Create an account'}
         </button>

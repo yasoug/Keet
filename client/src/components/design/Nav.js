@@ -6,12 +6,14 @@ const Nav = ({ minimal, setshowModal, showModal, setIsSignUp }) => {
   }
   const authToken = false
   return (
-    <nav>
+    <nav className='bar'>
       <div className="logo-container">
         <img className="logo" src={Keet_logo} alt="logo" />
       </div>
+      <div className='Title'>Keet🐾</div>
+      <div className='Sub'>Where felines find their Meow-tches!🐾🐾 </div>
       {!authToken && !minimal && (
-        <button className="nav-button" onClick={handleClick} disabled={showModal}>
+        <button className="nav-button" onClick={handleClick} disabled={showModal} >
           Log in
         </button>
       )}

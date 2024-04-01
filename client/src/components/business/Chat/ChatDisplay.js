@@ -12,7 +12,7 @@ const ChatDisplay = () => {
 
   return (
     <div className="chat-display">
-      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+      <Avatar>G</Avatar>
       <div className="chat-window">
         {messages.map((message, index) => (
           <div key={index} className="text-message" >
