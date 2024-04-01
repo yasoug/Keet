@@ -6,16 +6,18 @@ const Nav = ({ minimal, setshowModal, showModal, setIsSignUp }) => {
   }
   const authToken = false
   return (
-    <nav>
-      <div className="logo-container">
-        <img className="logo" src={Keet_logo} alt="logo" />
-      </div>
-      {!authToken && !minimal && (
-        <button className="nav-button" onClick={handleClick} disabled={showModal}>
+    /* making the navigator bar */
+  
+   <> 
+   
+   {!authToken && !minimal && (
+        <button className="primary-button mt-6"   onClick={handleClick} disabled={showModal}>
           Log in
         </button>
-      )}
-    </nav>
+      ) }
+   </>
+    
+  
   )
 }
 export default Nav
