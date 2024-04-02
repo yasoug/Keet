@@ -8,12 +8,12 @@ import Messaging from './Messaging'
 const messages = [
   {
     user: 'Glen',
-    lastMessage: 'hellooo',
+    lastMessage: '',
     img: 'https://i.imgur.com/aMPNEAw.jpg'
   },
   {
     user: 'Jake',
-    lastMessage: 'cute kitty',
+    lastMessage: 'hellooo',
     img: 'https://i.imgur.com/FnmRIGi.jpeg'
   }
 ]

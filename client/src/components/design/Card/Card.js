@@ -24,7 +24,7 @@ const Card = ({ Avatar, avatar, media, title, subheader, onClick, classes, sx })
         subheader={subheader}
         classes={classes}
         action={[
-          <IconButton key="x" aria-label="settings" >
+          <IconButton key="x" aria-label="settings" style={{overflow:'visible', overflowX:'visible', overflowY:'visible'}}>
             <MenuListComposition />
           </IconButton>
         ]}
