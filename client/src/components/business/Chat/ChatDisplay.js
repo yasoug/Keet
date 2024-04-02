@@ -24,8 +24,15 @@ const ChatDisplay = () => {
   
     return (
       <div className="chat-display">
-        <Avatar alt="Glen" src="https://i.imgur.com/aMPNEAw.jpg" sx={{ width: 56, height: 56 }} />
-        <div className="messages">
+        <div className='chatter'>
+            <div className='Avat'>
+                <Avatar src="https://i.imgur.com/aMPNEAw.jpg" sx={{ width: 60 , height: 60 }} />
+            </div>
+            <div className='glen'>
+                Glen
+            </div>
+        </div>
+        <div className="messages" >
           {messages.map((message, index) => (
             <div key={index} className="message" >
               {message}
@@ -40,7 +47,7 @@ const ChatDisplay = () => {
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Type your message here..."
           />
-          <button onClick={handleMessageSend} >Send</button>
+          <button onClick={handleMessageSend}  >Send</button>
         </div>
       </div>
     );
