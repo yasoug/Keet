@@ -1,12 +1,10 @@
-// Importing necessary dependencies and components from React and custom modules
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react'
 import Layout from '../components/layout'
 import Messages from '../components/business/Messages'
 import Matches from '../components/business/Matches'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Messaging from './Messaging'
-// Sample data for messages, matches, and users
+
 const messages = [
   {
     user: 'Glen',
@@ -31,56 +29,54 @@ const matches = [
   }
 ]
 
-
+const users = [
+  {
+    title: 'Fred',
+    subHeader: "I'm a really big fan of socks and cardboards",
+    media: 'https://i.imgur.com/Jvh1OQm.jpeg'
+  },
+  {
+    title: 'Whiskers',
+    subHeader: 'A really active kitty that likes to go out and play fight',
+    media: 'https://i.imgur.com/VgYAFPI.jpeg'
+  },
+  {
+    title: 'Legolas',
+    subHeader: 'A prince in paws',
+    media: 'https://i.imgur.com/JHfRHrJ.jpeg'
+  },
+  {
+    title: 'Bowser',
+    subHeader: 'I love to sunbathe and play with my toys',
+    media: 'https://i.imgur.com/rtLmWHZ.jpeg'
+  }
+]
 
 const Home = () => {
- 
   const navigate = useNavigate()
-  // State to track the active tab
+
   const [tab, handleChangeTab] = useState(0)
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-
-    fetchUserData();
-  }, []);
 
   const handleNavigate = (route) => () => {
     navigate(`/home/${route}`)
   }
 
-  
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get('http://localhost:8000/users'); 
-      console.log(response)
-      if (response) {
-        const formattedUsers = response.data.map(user => ({
-          title: user.name,
-          subHeader: user.likes,
-          media: user.url
-        }));
-        setUsers(formattedUsers);
-        console.log('users',users)
-      } 
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
-
   const tabs = [
-    <Messages key="matches" messages={matches} onMessageClick={handleNavigate('messaging')} />,
-    <Messages key="messages" messages={messages} onMessageClick={handleNavigate('messaging')} />
+    <Messages key="matches" messages={matches} onMessageClick={handleNavigate('messages')} />,
+    <Messages key="messages" messages={messages} onMessageClick={handleNavigate('messages')} />
   ]
-
+  console.log(location.pathname)
   return (
     <Layout onChangeTab={handleChangeTab} current={tab} tabs={tabs}>
-      <Matches users={users} />
+      {/* Conditionally render Matches only if the route path is not "messages" */}
+      
+      
       <Routes>
-        <Route path="messaging" element={<Messaging />} />
+        <Route path='/' element={<Matches users={users} />} exact/>
+        <Route path="messages" element={<Messaging />} />
       </Routes>
     </Layout>
-  )
+  );
 }
 
 export default Home

@@ -1,39 +1,40 @@
-import { Box, Typography, IconButton } from '@mui/material';
-import MatchCard from '../design/Card/MatchCard';
-import LikeIcon from '@mui/icons-material/Favorite';
-import DislikeIcon from '@mui/icons-material/Clear';
-import { useEffect, useState } from 'react';
-import Maybe from '../layout/Maybe';
+import { Box } from '@mui/system'
+import { IconButton, Typography } from '@mui/material'
 
-const Matches = ({ onMatchClick = () => {console.log('clicked ')}, onAttemptMatch = () => {console.log('match')}, users }) => {
-  const [_users, setUsers] = useState([]);
+import MatchCard from '../design/Card/MatchCard'
+
+import LikeIcon from '@mui/icons-material/Favorite'
+import DislikeIcon from '@mui/icons-material/Clear'
+import { useEffect, useState } from 'react'
+import Maybe from '../layout/Maybe'
+
+const Matches = ({ onMatchClick = () => {}, onAttemptMatch = () => {}, users }) => {
+  const [_users, setUsers] = useState([])
+  const handleClick = () => {
+    onMatchClick(_users[0])
+  }
 
   useEffect(() => {
-    setUsers(users);
-  }, [users]);
-
-  const handleClick = () => {
-    onMatchClick(_users[0]);
-  };
+    setUsers(users)
+  }, [users])
 
   const attemptMatching = () => {
-    const [potential, ...rest] = _users;
-    onAttemptMatch(potential);
-    setUsers(rest);
-  };
+    const [potential, ...rest] = _users
+    onAttemptMatch(potential)
+    setUsers(rest)
+  }
 
   const actions = [
-    <IconButton onClick={attemptMatching} key="dislike" aria-label="dislike">
+    <IconButton onClick={attemptMatching} key="dislike" aria-label="add to favorites">
       <DislikeIcon />
     </IconButton>,
-    <IconButton onClick={attemptMatching} key="like" aria-label="like">
+    <IconButton onClick={attemptMatching} key="like" aria-label="add to favorites">
       <LikeIcon />
     </IconButton>
-  ];
+  ]
 
   return (
-    <div className='w-96'>
-           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <Maybe
         condition={_users.length > 0}
         fallback={
@@ -46,12 +47,10 @@ const Matches = ({ onMatchClick = () => {console.log('clicked ')}, onAttemptMatc
               borderRadius: 3,
               boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px'
             }}
-            variant="h5"
-          >
+            variant="h5">
             There are no more matches in your area
           </Typography>
-        }
-      >
+        }>
         <MatchCard
           data={_users[0]}
           onClick={handleClick}
@@ -61,9 +60,7 @@ const Matches = ({ onMatchClick = () => {console.log('clicked ')}, onAttemptMatc
         />
       </Maybe>
     </Box>
-    </div>
-    
-  );
-};
+  )
+}
 
 export default Matches

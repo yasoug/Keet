@@ -1,5 +1,6 @@
 import Drawer from '@mui/material/Drawer'
 import Box from '@mui/material/Box'
+
 import UserHeader from '../business/UserHeader'
 import Tabs from '../design/Tabs'
 
@@ -16,7 +17,7 @@ const Layout = ({ children, tabs, current, onChangeTab, onProfileClick }) => {
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' }
         }}>
-        <UserHeader/>
+        <UserHeader onClick={onProfileClick} />
         {tabs && (
           <Tabs
             tabs={[{ label: 'catches' }, { label: 'catessages' }]}

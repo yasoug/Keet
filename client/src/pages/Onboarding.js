@@ -1,47 +1,39 @@
-// Importing necessary dependencies and components from React, custom modules, and third-party libraries
 import { useState } from 'react'
 import Nav from '../components/design/Nav'
 import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-// Functional component 'Onboarding'
 const Onboarding = () => {
-  // State to manage form data and user cookies
   const [Cookies] = useCookies('user')
   const [formData, setFromData] = useState({
-    user_id: localStorage.getItem('user'),
+    user_id: Cookies.user_id,
     name: '',
     age: '',
     show_sex: false,
     sex: '',
-    interest: '', 
+    sex_interest: '',
     url: '',
-    about: '',
+    likes: '',
     matches: []
-  });
-  
-  // Hook for navigating between pages
+  })
+
   let navigate = useNavigate()
-  // Handler for form submission
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      // Sending a PUT request to update user data
       const response = await axios.put('http://localhost:8000/user', { formData })
       const success = response.status === 200
       console.log(response)
-      // If the request is successful, navigate to the Home page
-      if (success) navigate('/Home')
+      if (success) navigate('/home')
     } catch (err) {
       console.log(err)
     }
   }
-  // Handler for input changes
   const handleChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
     const name = e.target.name
-    // Updating form data based on input changes
+
     setFromData((prevState) => ({
       ...prevState,
       [name]: value
@@ -111,8 +103,8 @@ const Onboarding = () => {
             <div className="multiple-input-container">
               <input
                 id="Male-ID-interest"
-                type="radio"
-                name="interest"
+                type='radio'
+                name='sex_interest'
                 value="Male"
                 onChange={handleChange}
                 checked={formData.sex_interest === 'Male'}
@@ -120,15 +112,15 @@ const Onboarding = () => {
               <label htmlFor="Male-ID-interest">Male</label>
               <input
                 id="Female-ID-interest"
-                type="radio"
-                name="interest"
+                type='radio'
+                name='sex_interest'
                 value="Female"
                 onChange={handleChange}
                 checked={formData.sex_interest === 'Female'}
               />
               <label htmlFor="Female-ID-interest">Female</label>
             </div>
-            <label htmlFor="about">About me</label>
+            <label htmlFor='likes'>About me</label>
             <input
               id="likes"
               type="text"

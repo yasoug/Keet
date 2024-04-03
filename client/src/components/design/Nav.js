@@ -16,8 +16,8 @@ const Nav = ({ minimal, setshowModal, showModal, setIsSignUp }) => {
         <button className="nav-button" onClick={handleClick} disabled={showModal} >
           Log in
         </button>
-      ) }
-  </nav>
+      )}
+    </nav>
   )
 }
 export default Nav

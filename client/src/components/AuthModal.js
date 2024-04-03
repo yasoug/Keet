@@ -1,15 +1,14 @@
 import { useState } from "react"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-
+import { useCookies } from 'react-cookie'
 
 const AuthModal = ({ setshowModal, IsSignUp }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setconfirmPassword] = useState("")
     const [error, setError] = useState(null)
-    const [spin,setSpin] = useState(false)
-   
+    const [, setCookie] = useCookies('user')
 
     const navigate = useNavigate()
 
@@ -19,19 +18,17 @@ const AuthModal = ({ setshowModal, IsSignUp }) => {
     }
 
     const handleSubmit = async (e) => {
-        /* putting a condition on the account submit */
         e.preventDefault()
         try {
-            setSpin(true)
             if (IsSignUp && (password !== confirmPassword)) {
                 setError('Passwords need to match')
                 return
             }
-            const response = await axios.post(`http://localhost:8000/${IsSignUp ? 'signup' : 'login'}`, { email, password });
-             console.log(response)
-             console.log(response.data.token)
-            localStorage.setItem('AuthToken', response.data.token);
-            localStorage.setItem('user',response.data.user_id)
+            const response = await axios.post(`http://localhost:8000/${IsSignUp ? 'signup' : 'login'}`, { email, password })
+
+            setCookie('AuthToken', response.data.token)
+            setCookie('user_id', response.data.user_id)
+
 
             const success = response.status === 201
 
@@ -42,28 +39,22 @@ const AuthModal = ({ setshowModal, IsSignUp }) => {
             console.error("Authentication failed:", error.message);
             setError("Authentication failed. Please check your credentials.");
         }
-
-        finally{
-              setSpin(false)
-        }
     }
     
     return (
         <div className="auth-modal">
-            <button className="close-icon" onClick={handleClick}>⮾</button>
-            <h2 className="ml-16" >{IsSignUp ? 'SignUp' : 'LOG IN'}</h2>
-           { IsSignUp ? <p>By Signing Up, you agree to our terms. Learn how we process your data in our Privacy Policy and Cookie Policy.</p>: <p>Welcome back! Log in to find your purrfect match </p> }
+            <div className="close-icon" onClick={handleClick}>⮾</div>
+            <h2>{IsSignUp ? 'CREATE ACCOUNT' : 'LOG IN'}</h2>
+            <p>By clicking Log in, you agree to our terms. Learn how we process your data in our Privacy Policy and Cookie Policy. </p>
             <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
+                <input type="email"
                     id="email"
                     name="email"
                     placeholder="email"
                     required={true}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <input
-                    type="password"
+                <input type="password"
                     id="password"
                     name="password"
                     placeholder="password"
@@ -83,6 +74,8 @@ const AuthModal = ({ setshowModal, IsSignUp }) => {
             </form>
             <hr />
             <h2>GET THE APP</h2>
+
+
         </div>
     );
 }
