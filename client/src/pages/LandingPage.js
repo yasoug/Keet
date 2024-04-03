@@ -1,7 +1,8 @@
 import Nav from '../components/design/Nav'
-import Keet_logo from '../images/Keet_logo.jpg'
 import AuthModal from '../components/AuthModal'
 import { useState } from 'react'
+import Keet_logo from '../images/Keet_logo.jpg'
+
 
 // Functional component 'LandingPage'
 const LandingPage = () => {
