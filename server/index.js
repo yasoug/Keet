@@ -1,5 +1,5 @@
 const PORT = 8000
-const uri = 'mongodb://127.0.0.1:27017/kittens'
+const uri = 'mongodb+srv://toumibusiness0:mypassword@cluster0.twesmhn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 const express = require('express')
 const { MongoClient } = require('mongodb')
 const { v4: uuidv4 } = require('uuid')
