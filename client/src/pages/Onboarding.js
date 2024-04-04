@@ -7,7 +7,7 @@ import axios from 'axios'
 const Onboarding = () => {
   const [Cookies] = useCookies('user')
   const [formData, setFromData] = useState({
-    user_id: Cookies.user_id,
+    user_id: Cookies.userId,
     name: '',
     age: '',
     show_sex: false,
